@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+  font-family: "Google Sans Flex", sans-serif;
+}
+
+/* FullScreen Loader Custom YumStop Override */
+.fullscreen-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Dark backdrop transparency matching your login pane mask overlay */
+  background-color: black; 
+  /* Blurs background elements smoothly behind the overlay container */
+  backdrop-filter: blur(4px); 
+  display: flex;
+  flex-direction: column; /* Allows subtext below spinner */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Ensures it overlays navigation headers and sidebars */
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  /* Transparent track */
+  border: 4px solid rgba(255, 204, 0, 0.1); 
+  /* Bold fire-red / orange indicator tip */
+  border-top: 4px solid #e63946; 
+  border-right: 4px solid #f6b100;
+  /* Ambient glowing ring shadow effect */
+  box-shadow: 0 0 20px rgba(230, 57, 70, 0.3);
+  animation: spin 1s cubic-bezier(0.5, 0.1, 0.4, 0.9) infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@layer utilities {
+  /* Elegant Custom Scrollbar styling for Webkit Engines (Chrome, Safari, Edge) */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(10, 10, 10, 0.2);
+    border-radius: 8px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(82, 82, 82, 0.4); /* neutral-600 with transparency */
+    border-radius: 8px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #facc15; /* yellow-400 accent highlight on hover */
+  }
+
+  /* Support for Firefox */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(82, 82, 82, 0.4) rgba(10, 10, 10, 0.2);
+  }
+}
+
+
