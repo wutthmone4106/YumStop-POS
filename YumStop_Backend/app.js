@@ -26,7 +26,8 @@ mongoose.connection.once('open', async () => {
 // Middlewares
 const allowedOrigins = [
   'https://yum-stop-pos.vercel.app',
-  'http://localhost:5173'             
+  'http://localhost:5173',
+  'http://localhost:3000'           
 ];
 
 app.use(cors({
