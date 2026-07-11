@@ -8,6 +8,7 @@ const globalErrorHandler = require("./middlewares/globalErrorHandler"); // Impor
 const cookieParser = require("cookie-parser"); // Middleware to parse cookies from incoming requests
 const cors = require("cors"); // Middleware to enable Cross-Origin Resource Sharing (CORS)
 const mongoose = require('mongoose');
+const path = require('path');
 
 // Importing Routes
 const PORT = config.port;
@@ -46,7 +47,7 @@ app.use(cors({
 }));
 app.use(express.json()); //parse incoming request in json format
 app.use(cookieParser()); //parse incoming request cookies
-app.use('/uploads', express.static('uploads')); 
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Root Endpoint
 app.get("/", (req,res) => {
