@@ -1,7 +1,9 @@
 import axios from 'axios'; // Create an Axios instance with the base URL of the API and a timeout of 10 seconds
 
+const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+
 const instance = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL, // Set the base URL for the API from environment variables
+  baseURL: isLocalhost ? 'http://localhost:3000' : import.meta.env.VITE_API_BASE_URL, // Set the base URL for the API from environment variables
   withCredentials: true, // Include credentials (like cookies) in cross-site requests
   headers: {
     'Content-Type': 'application/json', // Set the default content type for requests to JSON

@@ -24,10 +24,25 @@ mongoose.connection.once('open', async () => {
 });
 
 // Middlewares
+const allowedOrigins = [
+  'https://yum-stop-pos.vercel.app',
+  'http://localhost:5173'             
+];
+
 app.use(cors({
-    credentials: true, // Allow credentials (cookies) to be sent in cross-origin requests
-    origin: ['http://localhost:5173'], // Allow requests only from the specified frontend URL
-}))
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true, 
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept']
+}));
 app.use(express.json()); //parse incoming request in json format
 app.use(cookieParser()); //parse incoming request cookies
 app.use('/uploads', express.static('uploads')); 
