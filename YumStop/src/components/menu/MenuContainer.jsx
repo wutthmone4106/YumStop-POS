@@ -35,7 +35,7 @@ const MenuContainer = () => {
     const searchQuery = useSelector((state) => state.search?.query || '');
 
     const { data, isLoading, isError } = useQuery({
-        queryKey: ['menu-items'],
+        queryKey: ['menus'],
         queryFn: getMenus,
     });
 
@@ -179,9 +179,7 @@ const MenuContainer = () => {
                 const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
                 const currentBaseURL = isLocalhost ? 'http://localhost:3000' : import.meta.env.VITE_API_BASE_URL;
 
-                const imageURL = item.image?.startsWith('http') 
-                  ? item.image 
-                  : `${currentBaseURL}/${item.image.replace(/\\/g, '/')}`; 
+                const imageURL = item.image?.startsWith('http') ? item.image : `${currentBaseURL}/${item.image ? item.image.replace(/\\/g, '/') : ''}`;
 
                 return (
                   <div key={item._id} className="flex flex-col justify-between p-4 rounded-xl h-[160px] cursor-pointer hover:bg-[#2a2a2a] bg-[#1a1a1a] transition-all border border-transparent hover:border-[#333]">
